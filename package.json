@@ -1,0 +1,19 @@
+{
+  "name": "registry-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup --tsconfig ./tsconfig.script.json ./src/index.ts --target es2022 --format cjs --clean --metafile",
+    "start": "node ./dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2",
+    "zod": "^3.23.8"
+  }
+}

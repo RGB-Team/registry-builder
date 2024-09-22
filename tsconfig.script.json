@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "useUnknownInCatchVariables": false,
+    "useDefineForClassFields": true,
+    "moduleResolution": "node",
+    "lib": ["dom","ES2022"],
+    "allowJs": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "_dist"],
+  "include": ["src"],
+}
