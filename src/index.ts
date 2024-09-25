@@ -1,10 +1,11 @@
 import { promises as fs } from "fs";
+import * as fsync from "fs";
 import path from "path";
 import { preReq, RegistryItem } from "./lib/schema";
 // * path to import the registries from
 import { Registries } from "../../../data/preReq";
 
-const domain = process.env.NODE_ENV === "production" ? "https://shadcn-extension.vercel.app/"  : "http://localhost:3000";
+const domain = "https://shadcn-extension.vercel.app";
 
 async function hasSrcFolder(): Promise<string> {
   const srcPath = path.resolve(process.cwd(), "src");
@@ -81,7 +82,12 @@ async function main() {
   try {
     const preData = Registries;
     const processedItems = new Set<string>();
+    const registryPath = path.join(process.cwd(), "public/registry");
 
+    if (!fsync.existsSync(registryPath)) {
+      fsync.mkdirSync(registryPath);
+    }
+    console.log("this shit exists : " , path.resolve(process.cwd(), "public/registry"))
     for (const item of preData) {
       await processRegistryItem(item as preReq, preData as preReq[], processedItems);
     }
