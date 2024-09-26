@@ -3,7 +3,7 @@ import * as fsync from "fs";
 import path from "path";
 import { preReq, RegistryItem } from "./lib/schema";
 // * path to import the registries from
-import { Registries } from "../../../data/preReq";
+import { Registries } from "./registries";
 
 const domain = "https://shadcn-extension.vercel.app";
 
