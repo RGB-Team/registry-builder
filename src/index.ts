@@ -2,8 +2,9 @@ import { promises as fs } from "fs";
 import * as fsync from "fs";
 import path from "path";
 import { preReq, RegistryItem } from "./lib/schema";
+import { isUrl } from "./lib/utils";
 // * path to import the registries from
-import { Registries } from "./registries";
+import { Registries } from "../../../data/preReq";
 
 const domain = "https://shadcn-extension.vercel.app";
 
@@ -42,10 +43,14 @@ async function processRegistryItem(item: preReq, allItems: preReq[], processedIt
   // Process registry dependencies first
   if (item.registryDependencies) {
     for (const depName of item.registryDependencies) {
-      const depItem = allItems.find(i => i.name === depName);
-      if (depItem) {
-        await processRegistryItem(depItem, allItems, processedItems);
-        registryDependencies.push(`${domain}/registry/${depName}.json`);
+      if (isUrl(depName)) {
+        registryDependencies.push(`${depName}`);
+      } else {
+        const depItem = allItems.find(i => i.name === depName);
+        if (depItem) {
+          await processRegistryItem(depItem, allItems, processedItems);
+          registryDependencies.push(`${domain}/registry/${depName}.json`);
+        }
       }
     }
   }
